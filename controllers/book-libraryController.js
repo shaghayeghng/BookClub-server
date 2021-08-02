@@ -22,7 +22,6 @@ exports.getBooksOfLibrary = catchAsync(async (req, res, next) => {
 });
 
 exports.addBooksToLibrary = catchAsync(async (req, res, next) => {
-
   const newBooks = await book_libraryModel.create({
     bookID: req.body.bookID,
     library: req.body.library,

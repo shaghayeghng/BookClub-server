@@ -64,6 +64,7 @@ exports.addBook = catchAsync(async (req, res, next) => {
   });
 });
 
+//update the status of a book (available / not available)
 exports.updateStatus = catchAsync(async (req, res, next) => {
   const { bookID } = req.params;
   if (!bookID) {

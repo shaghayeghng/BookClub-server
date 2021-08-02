@@ -56,7 +56,7 @@ exports.updateRole = catchAsync(async (req, res, body) => {
   } else if (user.role === userRoles.STAFF) {
     return res.status(200).json({
       status: "Success",
-      message: "You are already a staff!",
+      message: "Already a staff!",
     });
   } else {
     return res.status(200).json({

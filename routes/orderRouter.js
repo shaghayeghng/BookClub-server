@@ -5,10 +5,12 @@ const orderController = require("./../controllers/orderController");
 
 const router = express.Router();
 
-router.route("/:bookID")
+router.route("/remove-all").delete(isLoggedIn, orderController.removeAllOrders);
+
+router
+  .route("/:bookID")
   .get(isLoggedIn, orderController.getOrder)
   .post(isLoggedIn, orderController.createOrder)
   .delete(isLoggedIn, orderController.deleteOrder);
 
 module.exports = router;
-

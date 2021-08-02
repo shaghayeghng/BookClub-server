@@ -41,9 +41,7 @@ exports.createOrder = catchAsync(async (req, res, next) => {
 exports.deleteOrder = catchAsync(async (req, res, next) => {
   const { bookID } = req.params;
   if (!bookID) {
-    return next(
-      new AppError("Request is not providing the book ID!", 400)
-    );
+    return next(new AppError("Request is not providing the book ID!", 400));
   }
   const order = await OrderModel.deleteOne({ bookID: bookID });
 
@@ -59,5 +57,17 @@ exports.deleteOrder = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.removeAllOrders = catchAsync(async (req, res, next) => {
+  const order = await OrderModel.deleteMany();
 
-//todo: delete all orders and empty cart
+  if (!order) {
+    return next(new AppError("No order found!", 404));
+  }
+
+  req.user.clearCart(req.user);
+
+  res.status(200).json({
+    status: "Success",
+    order,
+  });
+});

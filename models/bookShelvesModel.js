@@ -10,7 +10,7 @@ const bookShelvesSchema = new Schema(
     numOfBooks: {
       type: Number,
       required: true,
-      default: 0
+      default: 0,
     },
     user: {
       type: Schema.Types.ObjectId,
@@ -22,6 +22,11 @@ const bookShelvesSchema = new Schema(
     timestamps: true,
   }
 );
+
+bookShelvesSchema.methods.updateNumOfBooks = (bookShelf, num) => {
+  bookShelf.numOfBooks += num;
+  return bookShelf.save();
+};
 
 const bookShelves = mongoose.model("bookShelves", bookShelvesSchema);
 module.exports = bookShelves;

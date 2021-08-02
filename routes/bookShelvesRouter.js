@@ -20,7 +20,11 @@ router
   .get(isLoggedIn, book_bookShelvesController.getBooksOfBookShelf);
 
 router
-  .route("/add-to-bookshelf") 
+  .route("/:bookshelfID/add-to-bookshelf")
   .post(isLoggedIn, book_bookShelvesController.addBooksToBookShelf);
-module.exports = router;
 
+router
+  .route("/:bookshelfID/remove-from-bookshelf")
+  .patch(isLoggedIn, book_bookShelvesController.deleteBookOfBookShelf);
+
+module.exports = router;
